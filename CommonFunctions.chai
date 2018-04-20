@@ -1,4 +1,4 @@
-// Get Field ID
+// Get Field TSID.
 def GetFieldTSID(intSourceTableId, strFieldName) {
     var objFieldRecord = Ext.CreateAppRecord(Ext.TableId("TS_FIELDS"));
     var intFieldTSID = -1;
