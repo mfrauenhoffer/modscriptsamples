@@ -1,0 +1,33 @@
+// Get Field ID
+def GetFieldTSID(intSourceTableId, strFieldName) {
+    var objFieldRecord = Ext.CreateAppRecord(Ext.TableId("TS_FIELDS"));
+    var intFieldTSID = -1;
+    if (objFieldRecord.ReadByColumnAndColumn("TABLEID", intSourceTableId, "DBNAME", strFieldName)) {
+        print("GetFieldTSID Found a record: ${objFieldRecord.GetId()}")
+        intFieldTSID = objFieldRecord.GetId();
+    }
+    return intFieldTSID;
+}
+
+// Get selection for 
+def GetSelectionValueTSID(intSourceTableId, strFieldName, strValueName) {
+    var returnValue = -1;
+    var objSelection = Ext.CreateAppRecord(Ext.TableId("TS_SELECTIONS"));
+    // Get the TSID of the field we're basing our search on.
+    var intFieldTSID = GetFieldTSID(intSourceTableId, strFieldName);
+
+    if (objSelection.ReadByColumnAndColumn("FLDID", intFieldTSID, "NAME", strValueName)) {
+        print("Found field value - TSID: ${objSelection.GetId()}");
+        returnValue = objSelection.GetId();
+    }
+    return returnValue;
+}
+// Assumes usage of system TITLE field, returns TS_ID of item
+def GetAppRecordIDByTitle(intSourceTableId, strItemTitle) {
+    var returnValue = -1;
+    var objRecord = Ext.CreateAppRecord(intSourceTableId);
+    if (objRecord.ReadByColumn("TITLE", strItemTitle)) {
+            returnValue = objRecord.GetId();
+    }
+    return returnValue;
+}
