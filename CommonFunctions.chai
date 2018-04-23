@@ -1,4 +1,4 @@
-// Get Field TSID.
+// Get Field TSID by passing the Table ID and Field Name to the function.
 def GetFieldTSID(intSourceTableId, strFieldName) {
     var objFieldRecord = Ext.CreateAppRecord(Ext.TableId("TS_FIELDS"));
     var intFieldTSID = -1;
@@ -27,7 +27,7 @@ def GetAppRecordIDByTitle(intSourceTableId, strItemTitle) {
     var returnValue = -1;
     var objRecord = Ext.CreateAppRecord(intSourceTableId);
     if (objRecord.ReadByColumn("TITLE", strItemTitle)) {
-            returnValue = objRecord.GetId();
+        returnValue = objRecord.GetId();
     }
     return returnValue;
 }
