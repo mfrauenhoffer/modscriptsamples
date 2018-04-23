@@ -3,53 +3,54 @@ include("CommonFunctions")
 
 def ParseCIType(strNodeRole) {
 	var result;
+	var tableId = Ext.TableId("TSM_CONFIG_ITEMS");
 	switch (strNodeRole) {
 		case("server") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Server");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Server");
 			break;
 		}
 		case ("desktop") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Workstation");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Workstation");
 			break;
 		}
 		case ("virtualized_system") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Server");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Server");
 			break;
 		}
 		case ("graphics_adapter") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Hardware");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Hardware");
 			break;
 		}
 		case ("network_adapter") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Hardware");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Hardware");
 			break;
 		}
 		case ("memory_unit") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Memory");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Memory");
 			break;
 		}
 		case ("installed_software") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Software");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Software");
 			break;
 		}
 		case ("cpu") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Processor");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Processor");
 			break;
 		}
 		case ("interface") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Hardware");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Hardware");
 			break;
 		}
 		case ("hardware_board") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Hardware");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Hardware");
 			break;
 		}
 		case ("usb_device") {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Hardware");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Hardware");
 			break;
 		}
 		default {
-			result = GetSelectionValueTSID(Ext.TableId("TSM_CONFIG_ITEMS"), "ISSUETYPE", "Unknown");
+			result = GetSelectionValueTSID(tableId, "ISSUETYPE", "Unknown");
 			break;
 		}
 	}
@@ -224,7 +225,7 @@ for (objIntegrationConfig : objIntegrationConfigurations) {
 		if (continueProcessing) {
 			var objRelationshipToCreate = Ext.CreateAppRecord(Ext.TableId("TSM_RELATIONSHIPS"));
 			objRelationshipToCreate.SetFieldValue("TITLE", relationship.at("ucmdbId"));
-			objRelationshipToCreate.SetFieldValue("RELATIONSHIP_TYPE", GetAppRecordIDByTitle(Ext.TableId("TSM_RELATIONSHIP_TYPES"), "CM Integration Based Relationship"));
+			objRelationshipToCreate.SetFieldValue("RELATIONSHIP_TYPE", GetAppRecordIDByTitle(Ext.TableId("TSM_RELATIONSHIP_TYPES"), "CM Integration Based Relationship").to_string());
 			objRelationshipToCreate.SetFieldValue("PARENT_CI", parentCI.to_string());
 			objRelationshipToCreate.SetFieldValue("CHILD_CI", childCI.to_string());
 			var success = objRelationshipToCreate.Add();
